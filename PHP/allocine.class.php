@@ -35,6 +35,31 @@ class Allocine
         return $response;
     }
 
+    public function findMovieTime($movieId)
+    {
+	$theaters='P0671,W6902,P0005,P0035,P0015,P0012,W6903,P0017,P3757';
+        // build the params
+        $params = array(
+		'partner' => $this->_partner_key,
+		'theaters' => $theaters,
+		'movie' => $movieId,
+		'format' => 'json',
+        );
+
+        // do the request
+        $response = $this->_do_request('showtimelist', $params);
+
+        return $response;
+    }
+
+    public function getMovieId($query)
+    {
+	    $result = json_decode($this->search($query));
+	    $id = $result->feed->movie[0]->code;
+
+	    return $id;
+    }
+
     public function search($query)
     {
         // build the params
