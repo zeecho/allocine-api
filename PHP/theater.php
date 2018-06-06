@@ -27,12 +27,12 @@ define('ALLOCINE_SECRET_KEY', '29d185d98c984a359e6e6f26a0474269');
 
 $allocine = new Allocine(ALLOCINE_PARTNER_KEY, ALLOCINE_SECRET_KEY);
 
-//$movieId = $this->getMovieId($movie);
 $movie = json_decode($allocine->search($argv[1]));
 echo 'Titre : ' . $movie->feed->movie[0]->originalTitle . "\n";
 echo 'Date de sortie : ' . $movie->feed->movie[0]->release->releaseDate . "\n";
 echo 'Réalisateur(s) : ' . $movie->feed->movie[0]->castingShort->directors . "\n";
 echo 'Acteurice(s) : ' . $movie->feed->movie[0]->castingShort->actors . "\n\n";
+echo 'Lien : ' . $movie->feed->movie[0]->link[0]->href . "\n\n";
 $result = $allocine->findMovieTime($movie->feed->movie[0]->code);
 
 //echo $result;
